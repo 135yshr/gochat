@@ -38,3 +38,14 @@ Go を使って画面にメッセージを表示しましょう
 6. `buf := make([]byte, 1024)` の次の行に `n, _ := conn.Read(buf)` と書きます
 7. `n, _ := conn.Read(buf)` の次の行に `fmt.Printf("[Message]\n%s", string(buf[:n]))` と書きます
 8. 最後の行に `conn.Close()`
+
+## Lesson 4
+
+エラー処理を追加しましょう
+
+1. `listen, _ := net.Listen("tcp", "127.0.0.1:8888")` を `listen, err := net.Listen("tcp", "127.0.0.1:8888")` に書き換えます
+2. `listen, err := net.Listen("tcp", "127.0.0.1:8888")` の次の行にエラー処理を追加します
+3. `conn, _ := listen.Accept()` を `conn, err := listen.Accept()` に書き換えます
+4. `conn, err := listen.Accept()` の次の行にエラー処理を追加します
+5. `n, _ := conn.Read(buf)` を `n, err := conn.Read(buf)` に書き換えます
+6. `n, err := conn.Read(buf)` の次の行にエラー処理を追加します
