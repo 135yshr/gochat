@@ -21,17 +21,19 @@ func main() {
 	}
 	fmt.Println("Listen 127.0.0.1:8888")
 
-	conn, err := listen.Accept()
-	if err != nil {
-		log.Fatalln("Failed accept:", err)
-	}
+	for {
+		conn, err := listen.Accept()
+		if err != nil {
+			log.Fatalln("Failed accept:", err)
+		}
 
-	buf := make([]byte, 1024)
-	n, err := conn.Read(buf)
-	if err != nil {
+		buf := make([]byte, 1024)
+		n, err := conn.Read(buf)
+		if err != nil {
+			conn.Close()
+			log.Fatalln("Failed read:", err)
+		}
+		fmt.Printf("[Message]\n%s", string(buf[:n]))
 		conn.Close()
-		log.Fatalln("Failed read:", err)
 	}
-	fmt.Printf("[Message]\n%s", string(buf[:n]))
-	conn.Close()
 }
