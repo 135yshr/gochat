@@ -25,3 +25,16 @@ Go を使って画面にメッセージを表示しましょう
 10. `go run cmd/main.go` を実行します
 
 **`name := "My Name"`は、`var name string; name = "My Name"` や `var name string = "My Name"`と書くこともできます**
+
+## Lesson 3
+
+[net](https://golang.org/pkg/net/)を使って、ネットワーク通信を実装しましょう
+
+1. `fmt.Println("Hello", name)` の次の行に `listen, _ := net.Listen("tcp", "127.0.0.1:8888")` と書きます
+2. `listen, _ := net.Listen("tcp", "127.0.0.1:8888")` の次の行に `fmt.Println("Listen 127.0.0.1:8888")` と書きます
+3. `fmt.Println("Listen 127.0.0.1:8888")` の次の行に `conn, _ := listen.Accept()` と書きます
+4. `go run cmd/main.go` を実行します
+5. `conn, _ := listen.Accept()` の次の行に `buf := make([]byte, 1024)` と書きます
+6. `buf := make([]byte, 1024)` の次の行に `n, _ := conn.Read(buf)` と書きます
+7. `n, _ := conn.Read(buf)` の次の行に `fmt.Printf("[Message]\n%s", string(buf[:n]))` と書きます
+8. 最後の行に `conn.Close()`

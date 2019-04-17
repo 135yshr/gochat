@@ -3,7 +3,6 @@ package main
 import (
 	"bufio"
 	"fmt"
-	"log"
 	"net"
 	"os"
 )
@@ -15,23 +14,13 @@ func main() {
 	name := stdin.Text()
 	fmt.Println("Hello", name)
 
-	listen, err := net.Listen("tcp", "127.0.0.1:8888")
-	if err != nil {
-		log.Fatalln("Failed listen:", err)
-	}
+	listen, _ := net.Listen("tcp", "127.0.0.1:8888")
 	fmt.Println("Listen 127.0.0.1:8888")
 
-	conn, err := listen.Accept()
-	if err != nil {
-		log.Fatalln("Failed accept:", err)
-	}
+	conn, _ := listen.Accept()
 
 	buf := make([]byte, 1024)
-	n, err := conn.Read(buf)
-	if err != nil {
-		conn.Close()
-		log.Fatalln("Failed read:", err)
-	}
+	n, _ := conn.Read(buf)
 	fmt.Printf("[Message]\n%s", string(buf[:n]))
 	conn.Close()
 }
